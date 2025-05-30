@@ -1,0 +1,8 @@
+{
+    "watch": ["src/", "app.js"],
+    "ext": "js,json",
+    "ignore": ["src/tests/"],
+    "execMap": {
+      "js": "node --experimental-modules"
+    }
+  }
