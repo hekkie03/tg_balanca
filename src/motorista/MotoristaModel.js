@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
 // Validation Schema
-export const VeiculoSchema = z.object({
+export const MotoristaSchema = z.object({
   veiplaca: z.string(),
   veimarca: z.string(),
   veiorigem: z.string()
 });
 
 // Data Type Declaration
-export class VeiculoModel {
+export class MotoristaModel {
   /**
    * @param {object} payload
    * @param {string} payload.veiplaca

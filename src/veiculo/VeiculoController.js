@@ -34,4 +34,4 @@ class VeiculoController {
   }
 }
 
-export default new SensorController();
+export default new VeiculoController();

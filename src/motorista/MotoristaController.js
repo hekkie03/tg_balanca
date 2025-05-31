@@ -1,14 +1,14 @@
-import VeiculoRepository from './VeiculoRepository.js';
-import { VeiculoModel } from './VeiculoModel.js';
+import MotoristaRepository from './MotoristaRepository.js';
+import { MotoristaModel } from './MotoristaModel.js';
 
-class VeiculoController {
+class MotoristaController {
   async create(req, res) {
     try {
       // Create data object
-      const veiculoModel = new VeiculoModel(req.body);
+      const motoristaModel = new MotoristaModel(req.body);
       
       // Repository handles validation and DB insert
-      const result = await VeiculoRepository.create(veiculoModel);
+      const result = await MotoristaRepository.create(motoristaModel);
       
       res.status(201).json(result);
     } catch (error) {
@@ -22,7 +22,7 @@ class VeiculoController {
   async getAll(req, res) {
     try {
       // Get All
-      const result = await VeiculoController.getAll();
+      const result = await MotoristaController.getAll();
       
       res.status(201).json(result);
     } catch (error) {
@@ -34,4 +34,4 @@ class VeiculoController {
   }
 }
 
-export default new SensorController();
+export default new MotoristaController();
