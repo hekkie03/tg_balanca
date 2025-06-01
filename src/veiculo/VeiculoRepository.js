@@ -21,6 +21,12 @@ class VeiculoRepository {
       .orderBy('id', 'desc');
   }
 
+  async selectById(id) {
+    return db('veiculo')
+      .select('*')
+      .where('id', id);
+  }
+
 }
 
 export default new VeiculoRepository();

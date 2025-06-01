@@ -1,23 +1,23 @@
 import { z } from 'zod';
 
 // Validation Schema
-export const MotoristaSchema = z.object({
-  veiplaca: z.string(),
-  veimarca: z.string(),
-  veiorigem: z.string()
+export const motoristaSchema = z.object({
+  motnome: z.string(),
+  motendereco: z.string(),
+  mottelefone: z.string().max(11, 'Telefone é maior que 11 digitos')
 });
 
 // Data Type Declaration
 export class MotoristaModel {
   /**
    * @param {object} payload
-   * @param {string} payload.veiplaca
-   * @param {string} payload.veimarca
-   * @param {string} payload.veiorigem
+   * @param {string} payload.motnome
+   * @param {string} payload.motendereco
+   * @param {string} payload.mottelefone
    */
   constructor(payload) {
-    this.veiplaca = payload.veiplaca;
-    this.veimarca = payload.veimarca;
-    this.veiorigem = payload.veiorigem;
+    this.motnome = payload.motnome;
+    this.motendereco = payload.motendereco;
+    this.mottelefone = payload.mottelefone;
   }
 }

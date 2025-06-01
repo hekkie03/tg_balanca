@@ -4,6 +4,9 @@ export function up(knex) {
       table.string('veiplaca').notNullable();
       table.string('veimarca').nullable();
       table.string('veiorigem').nullable();
+      table.string('veirfid').nullable();
+      table.integer('veiidmotorista').nullable();
+      table.integer('veiidcarga').nullable();
     });
   }
   

@@ -1,4 +1,8 @@
 import RfidRepository from './RfidRepository.js';
+import PesagemRepository from '../pesagem/PesagemRepository.js';
+import VeiculoRepository from '../veiculo/VeiculoRepository.js';
+import CargaRepository from '../carga/CargaRepository.js';
+import MotoristaRepository from '../motorista/MotoristaRepository.js';
 import { RfidModel } from './RfidModel.js';
 
 class RfidController {
@@ -21,10 +25,25 @@ class RfidController {
 
   async poggers(req, res) {
     try {
+      /* {
+        "uid":  "1371B62C",
+        "nome":  "Camiao01",
+        "placa":  "ABC1D34",
+        "cultura":  "Mandioca",
+        "peso_bruto":  0,
+        "peso_tara":  0,
+        "peso_liquido":  0
+      } */
+      const { uid } = req.body;
+      const [{ idveiculo, idmotorista, idcarga }] = await RfidRepository.selectByRfid(uid)
+      console.log(idveiculo, idmotorista, idcarga)
+      const veiculo = await VeiculoRepository.selectById(idveiculo);
+      const motorista = await MotoristaRepository.selectById(idmotorista);
+      const carga = await CargaRepository.selectById(idcarga);
+
+      console.log({veiculo, motorista, carga});
       
-      console.log(req.body);
-      
-      res.status(201).json('POGGERS!!!');
+      res.status(201).json({veiculo, motorista, carga});
     } catch (error) {
       res.status(400).json({ 
         error: error.message,

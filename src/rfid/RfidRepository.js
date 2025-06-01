@@ -21,6 +21,17 @@ class RfidRepository {
       .orderBy('id', 'desc');
   }
 
+  async selectByRfid(rfid) {
+    const select = db('rfid')
+      .select('veiculo.id as idveiculo', 'motorista.id as idmotorista', 'carga.id as idcarga')
+      .select('rfid.rficodigo')
+      .leftJoin('veiculo', 'veiculo.veirfid', 'rfid.rficodigo')
+      .leftJoin('motorista', 'motorista.id','veiculo.veiidmotorista')
+      .leftJoin('carga', 'carga.id','veiculo.veiidcarga')
+      .where('veiculo.veirfid', rfid)
+    console.log(select.toSQL().sql);
+    return select;
+  }
 }
 
 export default new RfidRepository();
