@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 // Validation Schema
 export const pesagemSchema = z.object({
-  pesdatapesagem: z.string(),
-  peskg: z.number().nonnegative,
+  pesdatapesagem: z.date(),
+  peskg: z.number().nonnegative(),
   pesidveiculo: z.number(),
   pesidmotorista: z.number(),
   pesidcarga: z.number(),

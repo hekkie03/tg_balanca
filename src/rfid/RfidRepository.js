@@ -24,7 +24,7 @@ class RfidRepository {
   async selectByRfid(rfid) {
     const select = db('rfid')
       .select('veiculo.id as idveiculo', 'motorista.id as idmotorista', 'carga.id as idcarga')
-      .select('rfid.rficodigo')
+      .select('rfid.rficodigo', 'rfid.id as idrfid')
       .leftJoin('veiculo', 'veiculo.veirfid', 'rfid.rficodigo')
       .leftJoin('motorista', 'motorista.id','veiculo.veiidmotorista')
       .leftJoin('carga', 'carga.id','veiculo.veiidcarga')

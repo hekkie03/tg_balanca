@@ -35,19 +35,38 @@ class RfidController {
         "peso_liquido":  0
       } */
       const { uid } = req.body;
-      const [{ idveiculo, idmotorista, idcarga }] = await RfidRepository.selectByRfid(uid)
+      const [{ idrfid , idveiculo, idmotorista, idcarga }] = await RfidRepository.selectByRfid(uid)
       console.log(idveiculo, idmotorista, idcarga)
-      const veiculo = await VeiculoRepository.selectById(idveiculo);
-      const motorista = await MotoristaRepository.selectById(idmotorista);
-      const carga = await CargaRepository.selectById(idcarga);
+      const [veiculo] = await VeiculoRepository.selectById(idveiculo);
+      const [motorista] = await MotoristaRepository.selectById(idmotorista);
+      const [carga] = await CargaRepository.selectById(idcarga);
 
-      console.log({veiculo, motorista, carga});
+      const criarPesagem = {
+        pesdatapesagem: new Date(),
+        peskg: req.body.peso_liquido,
+        pesidveiculo: idveiculo,
+        pesidmotorista: idmotorista,
+        pesidcarga: idcarga,
+        pesidrfid: idrfid
+      }
+
+      await PesagemRepository.create(criarPesagem);
       
-      res.status(201).json({veiculo, motorista, carga});
+      const retorno = {
+        nomemotorista: motorista.motnome,
+        placacaminhão: veiculo.veiplaca,
+        tipocarga: carga.cartipocarga,
+        origem: carga.carorigem,
+        destino: carga.cardestino,
+        peso: req.body.peso_liquido,
+        rfid: uid,
+      }
+      
+      res.status(201).json(retorno);
     } catch (error) {
       res.status(400).json({ 
         error: error.message,
-        details: error.errors 
+        details: error 
       });
     }
   }
